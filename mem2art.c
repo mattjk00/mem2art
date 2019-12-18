@@ -8,7 +8,7 @@
 #include <string.h>
 int main() {
     // size of array to allocate
-    const int size = 48;
+    const size_t size = 32;
     int* x = malloc(size * sizeof(int));
     // how many characters the data will be when concatted together
     int dataSize = 0;
@@ -18,7 +18,7 @@ int main() {
         dataSize += ds;
     }
     // allocate a string to store the integers in as a string
-    char* intString = malloc(dataSize + 1);
+    char* intString = malloc(dataSize);
     // put the integers into string form
     for (int i = 0; i < size; i++) {
         int ds = floor(log10(abs(x[i]))) + 1;

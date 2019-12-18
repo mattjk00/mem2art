@@ -15,20 +15,26 @@ class Point {
     public int getX() { return x; }
     public int getY() { return y; }
 }
+String x;
 
-String x = "08053063680805306368149520382432767184298215232767149515023232767184307598032767";
-String x1 = "05368709120536870912149520382432767184298215232767149515023232767184307598032767000000000000";
-String x3 = "0107374182401073741824149520382432767184298215232767149515023232767184307598032767000000000000000000000000000000000000";
 void setup() {
-    
-    if (args.length > 0) {
+    size(500, 500);
+    background(50);
+    noStroke();
+    if (args != null) {
         x = args[0].replace(" ", "");
         x = x.replace("-", "");
+        drawMem();
+    } else {
+        fill(0);
+        textSize(32);
+        text("No data given!", 15, 35);
     }
-    print("Starting...\n\n");
-    print(args);
-    size(500, 500);
-    background(255);
+}
+/**
+    Draws some art based on the data arguments.
+*/
+void drawMem() { 
     Point[] vals = new Point[x.length() / 16];
     for (int i = 0; i < vals.length; i++) {
         color c = color(
@@ -41,7 +47,7 @@ void setup() {
         Point p = new Point(c, xpos, ypos);
         vals[i] = p;
     }
-    noStroke();
+    
     int cellW = width / vals.length;
     int cellsX = width / cellW;
     int cellH = height / vals.length;
@@ -52,8 +58,11 @@ void setup() {
         for (int x = 0; x < cellsX; x++) {
           //String hexVal = vals[count++];
           
-          fill(vals[count].getColor());
-          rect(vals[count].getX(), vals[count].getY(), cellW * vals[count].getX(), cellH);
+          stroke(vals[count].getColor());
+          strokeWeight(3);
+          int xp = vals[count].getX() * 2;
+          int yp = vals[count].getY() * 2;
+          line(xp + cellW, yp, yp, xp);
           count++;
           if (count >= vals.length) {
               count = 0;
