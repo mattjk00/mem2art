@@ -1,0 +1,1 @@
+gcc mem2art.c && ./a.out
